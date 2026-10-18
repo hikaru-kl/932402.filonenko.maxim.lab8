@@ -1,0 +1,13 @@
+:root { font-family: Arial, sans-serif; color: #24332b; background: #f5f6f2; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+header { padding: 18px 5%; background: #315c45; }
+.brand { color: white; text-decoration: none; font-weight: bold; }
+.container { width: min(900px, 92%); margin: 35px auto; }
+.eyebrow { color: #315c45; letter-spacing: 2px; font-size: 12px; }
+h1 { font-size: 40px; }
+.album-form { display: grid; gap: 8px; max-width: 420px; background: white; padding: 20px; border-radius: 10px; }
+input, button { font: inherit; padding: 10px; border: 1px solid #d5ddd4; border-radius: 5px; }
+button { background: #315c45; color: white; cursor: pointer; }
+.album-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 20px; }
+.album-card { background: white; padding: 18px; border-radius: 8px; }
