@@ -60,3 +60,10 @@ footer { margin-top: 30px; padding: 24px; text-align: center; border-top: 1px so
 .empty { grid-column: 1 / -1; border: 1px dashed #bdc9bc; border-radius: 10px; text-align: center; color: var(--muted); padding: 45px 15px; }
 @media (max-width: 1000px) { .toolbar { grid-template-columns: repeat(3, minmax(0, 1fr)); } .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .site-header { align-items: flex-start; flex-direction: column; gap: 4px; } .hero { padding-top: 36px; } .toolbar { grid-template-columns: 1fr; } .gallery-grid { grid-template-columns: 1fr; } .photo-preview { height: 240px; } .content-heading { align-items: flex-start; flex-direction: column; gap: 6px; } }
+
+.album-management { margin: 28px 0; }
+.album-management-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.album-management-item { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 8px 10px; }
+.album-management-item span { font-size: 13px; }
+.album-management-item button { padding: 6px 9px; font-size: 12px; }
+.album-management-item .danger { background: #a44235; }

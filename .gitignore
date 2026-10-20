@@ -1,3 +1,6 @@
+gallery.db
+package-lock.json
+
 node_modules/
 .env
 *.log

@@ -38,6 +38,67 @@ async function loadAlbums() {
   });
 
   if ([...albumFilter.options].some(option => option.value === selected)) albumFilter.value = selected;
+  renderAlbumManagement();
+}
+
+
+function renderAlbumManagement() {
+  const container = document.getElementById('album-management-list');
+  if (!container) return;
+  container.replaceChildren();
+
+  if (!albums.length) {
+    container.textContent = 'Альбомов пока нет.';
+    return;
+  }
+
+  albums.forEach(album => {
+    const item = document.createElement('div');
+    item.className = 'album-management-item';
+    const name = document.createElement('span');
+    name.textContent = album.name;
+
+    const rename = document.createElement('button');
+    rename.type = 'button';
+    rename.className = 'button-light';
+    rename.textContent = 'Переименовать';
+    rename.addEventListener('click', async () => {
+      const nextName = prompt('Новое название альбома', album.name);
+      if (nextName === null || !nextName.trim()) return;
+      try {
+        await request(`/api/albums/${album.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: nextName.trim() })
+        });
+        await loadAlbums();
+        await loadPhotos();
+        showMessage('Альбом переименован.');
+      } catch (error) {
+        showMessage(error.message);
+      }
+    });
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'danger';
+    remove.textContent = 'Удалить';
+    remove.addEventListener('click', async () => {
+      if (!confirm(`Удалить альбом «${album.name}» и все фотографии в нём?`)) return;
+      try {
+        await request(`/api/albums/${album.id}`, { method: 'DELETE' });
+        currentPage = 1;
+        await loadAlbums();
+        await loadPhotos();
+        showMessage('Альбом удалён.');
+      } catch (error) {
+        showMessage(error.message);
+      }
+    });
+
+    item.append(name, rename, remove);
+    container.appendChild(item);
+  });
 }
 
 async function loadPhotos() {
