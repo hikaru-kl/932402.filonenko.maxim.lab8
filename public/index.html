@@ -3,22 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Галерея фотографий с альбомами, тегами и просмотром снимков.">
   <title>Галерея фотографий</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <header><a class="brand" href="/">Галерея фотографий</a></header>
+  <header class="site-header">
+    <a class="brand" href="/">STORIES / Галерея</a>
+    <span class="header-note">Личная фотоколлекция</span>
+  </header>
   <main class="container">
-    <p class="eyebrow">PHOTO STORIES</p>
-    <h1>Альбомы</h1>
-    <form id="album-form" class="album-form">
-      <label for="album-name">Название нового альбома</label>
-      <input id="album-name" name="name" required>
-      <button>Добавить альбом</button>
-    </form>
-    <p id="message" role="status"></p>
-    <div id="albums" class="album-list"></div>
+    <section class="hero">
+      <p class="eyebrow">PHOTO STORIES · 2026</p>
+      <h1>Моменты, которые <em>остаются</em></h1>
+      <p>Собирай снимки в альбомы, добавляй подписи и находи фотографии по тегам.</p>
+    </section>
+    <section class="toolbar">
+      <div>
+        <label for="album-filter">Альбом</label>
+        <select id="album-filter"><option value="">Все альбомы</option></select>
+      </div>
+      <div>
+        <label for="tag-filter">Тег</label>
+        <input id="tag-filter" placeholder="Например, nature">
+      </div>
+      <div>
+        <label for="sort-order">Сортировка</label>
+        <select id="sort-order">
+          <option value="newest">Сначала новые</option>
+          <option value="oldest">Сначала старые</option>
+        </select>
+      </div>
+      <button id="filter-button" type="button">Применить</button>
+      <button id="add-album-button" type="button" class="button-light">Новый альбом</button>
+      <button id="add-photo-button" type="button">Добавить фото</button>
+    </section>
+    <div class="content-heading">
+      <div><p class="eyebrow">КОЛЛЕКЦИЯ</p><h2 id="gallery-title">Все фотографии</h2></div>
+      <span id="photo-count" class="count">0 фотографий</span>
+    </div>
+    <div id="gallery" class="gallery-grid"></div>
+    <nav id="pagination" class="pagination" aria-label="Страницы галереи"></nav>
+    <p id="message" role="status" aria-live="polite"></p>
   </main>
+  <dialog id="photo-dialog" class="dialog">
+    <form id="photo-form" method="dialog">
+      <div class="dialog-heading"><h2 id="photo-dialog-title">Добавить фото</h2><button type="button" class="icon-button" id="close-photo-dialog" aria-label="Закрыть">×</button></div>
+      <input type="hidden" id="photo-id">
+      <label for="photo-album">Альбом</label>
+      <select id="photo-album" required></select>
+      <label for="photo-filename">Имя файла или URL изображения</label>
+      <input id="photo-filename" required placeholder="photo.jpg или https://...">
+      <label for="photo-caption">Подпись</label>
+      <input id="photo-caption" required placeholder="Что изображено?">
+      <label for="photo-tags">Теги через запятую</label>
+      <input id="photo-tags" placeholder="nature, travel">
+      <div class="dialog-actions"><button type="button" class="button-light" id="cancel-photo">Отмена</button><button type="submit">Сохранить</button></div>
+    </form>
+  </dialog>
+  <dialog id="album-dialog" class="dialog">
+    <form id="album-form" method="dialog">
+      <div class="dialog-heading"><h2>Новый альбом</h2><button type="button" class="icon-button" id="close-album-dialog" aria-label="Закрыть">×</button></div>
+      <label for="album-name">Название альбома</label>
+      <input id="album-name" required>
+      <div class="dialog-actions"><button type="button" class="button-light" id="cancel-album">Отмена</button><button type="submit">Создать альбом</button></div>
+    </form>
+  </dialog>
+  <dialog id="view-dialog" class="dialog view-dialog">
+    <button type="button" class="icon-button close-view" id="close-view-dialog" aria-label="Закрыть">×</button>
+    <img id="view-image" alt="">
+    <h2 id="view-caption"></h2>
+    <p id="view-meta"></p>
+  </dialog>
+  <footer><p>Лабораторная работа №8 · Node.js · Express · SQLite</p></footer>
   <script src="/app.js"></script>
 </body>
 </html>
